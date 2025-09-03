@@ -1,0 +1,45 @@
+# Databricks notebook source
+# MAGIC %md
+# MAGIC # Example Notebook
+
+# COMMAND ----------
+
+# DBTITLE 1,Notebook-scoped wheel path
+# MAGIC dbutils.widgets.text(
+# MAGIC     "wheel_path",
+# MAGIC     "/Workspace/Users/jesse.schouten@outlook.com/.bundle/RevoData/dev/artifacts/.internal/*.whl",
+# MAGIC )
+
+# COMMAND ----------
+
+# DBTITLE 1,Notebook-scoped wheel installation
+# MAGIC %pip install --no-deps --force-reinstall {dbutils.widgets.get("wheel_path")}
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### Import wheel function
+
+# COMMAND ----------
+
+from revodata.main import main
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### Run imported function
+
+# COMMAND ----------
+
+result = main()
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### Assert equality
+
+# COMMAND ----------
+expected: bool = True
+assert expected == result  # noqa: S101
+
+print("Notebook task is successfully completed.")

@@ -1,0 +1,62 @@
+# RevoData
+
+![Databricks Runtime](https://img.shields.io/badge/Databricks%20Runtime-15.4--LTS-%231B3139)
+[![python](https://img.shields.io/badge/python-3.11-g)](https://www.python.org)
+[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![Checked with mypy](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+
+[![ci](https://github.com/revodatanl/RevoData/actions/workflows/ci.yml/badge.svg)](https://github.com/revodatanl/RevoData/actions/workflows/ci.yml)
+[![semantic-release](https://github.com/revodatanl/RevoData/actions/workflows/semantic-release.yml/badge.svg)](https://github.com/revodatanl/RevoData/actions/workflows/semantic-release.yml)
+
+mytestproj
+
+The `RevoData` project was generated from [RevoData Asset Bundle Templates](https://github.com/revodatanl/revo-asset-bundle-templates) version `0.16.5`.
+
+## Prerequisites
+
+Ensure you have the following tools installed:
+
+- **[uv](https://docs.astral.sh/uv/)** - Fast Python package manager and project management
+- **[git](https://git-scm.com/)** - Version control system
+- **[Databricks CLI](https://docs.databricks.com/dev-tools/cli/index.html)** - Command-line interface for Databricks operations
+- **[make](https://www.gnu.org/software/make/)** - Build automation tool (very convenient during development)
+
+**Platform Support**: This project is designed for **Linux** and **macOS**. Windows users should use a **DevContainer** or **[Windows Subsystem for Linux (WSL)](wsl.md) (recommended)** for the best development experience.
+
+## Quick Start
+
+Set up a fully configured development environment by running:
+
+```bash
+make (setup)
+```
+
+You may need to update the `PROFILE_NAME` variable in the `Makefile` to match your Databricks profile name.  In addition, ensure that the host URL in `bundle/targets.yml` matches your Databricks profile URL.
+
+Additional `make` commands are available for various tasks:
+
+```bash
+make lint     # Run linting
+make test     # Run tests
+make validate # Validate bundle on default workspace
+make deploy   # Deploy bundle to default workspace
+make destroy  # Destroy bundle resources on default workspace
+```
+
+## Documentation
+
+Comprehensive documentation can be found [here](docs/README.md).
+
+- **[Getting Started](getting_started.md)** - Set up your development environment
+- **[Development](development.md)** - Project structure, configuration, code quality, and (testing on) Databricks Connect
+- **[Bundle Deployment](bundle_deployment.md)** - Databricks Asset Bundle deployment, Git strategy, and CI/CD
+- **[Coding Standards](coding_standard.md)** - Code style and conventions
+- **[Command Reference](commands.md)** - All available `make` commands
+- **[WSL](wsl.md)** - Instructions for Windows Subsystem for Linux setup
+
+## Troubleshooting
+
+- Refer to the [Databricks documentation](https://docs.databricks.com/dev-tools/bundles/index.html) for bundle-specific questions

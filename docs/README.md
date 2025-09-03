@@ -1,0 +1,34 @@
+# RevoData
+
+![Databricks Runtime](https://img.shields.io/badge/Databricks%20Runtime-15.4--LTS-%231B3139)
+[![python](https://img.shields.io/badge/python-3.11-g)](https://www.python.org)
+[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![Checked with mypy](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+
+[![ci](https://github.com/revodatanl/RevoData/actions/workflows/ci.yml/badge.svg)](https://github.com/revodatanl/RevoData/actions/workflows/ci.yml)
+[![semantic-release](https://github.com/revodatanl/RevoData/actions/workflows/semantic-release.yml/badge.svg)](https://github.com/revodatanl/RevoData/actions/workflows/semantic-release.yml)
+
+mytestproj
+
+## Quick Start
+
+- **[Getting Started](getting_started.md)** - Set up your development environment
+
+## Development
+
+- **[Development](development.md)** - Project structure, configuration, code quality, and (testing on) Databricks Connect
+- **[Bundle Deployment](bundle_deployment.md)** - Databricks Asset Bundle deployment, Git strategy, and CI/CD
+
+## Appendices
+
+- **[Coding Standards](coding_standard.md)** - Code style and conventions
+- **[Command Reference](commands.md)** - All available `make` commands
+- **[WSL](wsl.md)** - Instructions for Windows Subsystem for Linux setup
+
+## Troubleshooting
+
+- Review the [command reference](commands.md) for available tools, probably `make clean` is a good start
+- Refer to the [Databricks documentation](https://docs.databricks.com/dev-tools/bundles/index.html) for bundle-specific questions

@@ -1,0 +1,55 @@
+name: Deploy Databricks Asset Bundle
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy_test:
+    name: Deploy to test
+    runs-on: ubuntu-latest
+    environment: test
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to test
+        uses: ./.github/actions/cd
+        with:
+          target: test
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+          DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
+
+  # Make sure to configure environment protection rules to enable the manual approval
+  # in your GitHub repository settings. Go to Settings → Environments → `prod` and add required reviewers.
+  wait_for_approval:
+    name: Await production approval
+    needs: deploy_test
+    runs-on: ubuntu-latest
+    timeout-minutes: 720 # 12 hours
+    environment: prod
+    steps:
+      - name: Wait for approval
+        run: |
+          echo "Production deployment for ${{ github.ref_name }} has been approved and will proceed"
+
+  deploy_prod:
+    name: Deploy to production
+    needs: wait_for_approval
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to production
+        uses: ./.github/actions/cd
+        with:
+          target: prod
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+          DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}

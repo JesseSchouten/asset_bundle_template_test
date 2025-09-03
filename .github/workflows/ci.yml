@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+      - name: Install development environment from uv.lock
+        run: uv sync --frozen
+
+      - name: Run formatting checks
+        run: |
+          set -e
+          echo "Running ruff"
+          uv run ruff check --output-format=github .
+          echo "Running mypy"
+          uv run mypy .
+          echo "Running pydoclint"
+          uv run pydoclint .
+          echo "Formatting checks passed ✅"
+
+      - name: Build and validate package
+        run: |
+          set -e
+          echo "Building package"
+          uv build
+          echo "Unpacking package"
+          tar -xvzf dist/revodata-*.tar.gz
+          echo "Validating package"
+          diff -r -x __pycache__ src revodata-*/src
+          echo "Package validated ✅"
+
+      - name: Run unit tests
+        run: |
+          set -e
+          uv run pytest -v tests \
+          --cov=src \
+          --cov-report=term \
+          --cov-report=xml:coverage.xml \
+          --junit-xml=test-results.xml
+          echo "Unit tests passed ✅"
+        env:
+          PYTHONPATH: ${{ github.workspace }}/src
+
+      - name: Publish coverage report to Codecov 📈
+        uses: codecov/codecov-action@v5
+        with:
+          fail_ci_if_error: true
+          files: coverage.xml
+          flags: unittests
+          name: codecov-umbrella
+          verbose: true
+          use_oidc: true
